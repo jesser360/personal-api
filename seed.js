@@ -1,15 +1,42 @@
-// This file allows us to seed our application with data
-// simply run: `node seed.js` from the root of this project folder.
+var db = require('./models');
 
-// var db = require('./models');
+var teams_list = [
+{
+  city:"Golden State",
+  name:"Warriors",
+  bestPlayers:["Stephen Curry","Klay Thompson","Draymond Green"],
+  championships: 4,
+  currentWinningRecord: false
+},
+{
+  city:"Los Angeles",
+  name:"Lakers",
+  bestPlayers:["Kobe Bryant","Magic Johnson","Shaquille O'neil"],
+  championships: 16,
+  currentWinningRecord: false
+},
+{
+  city:"Chicago",
+  name:"Bulls",
+  bestPlayers:["Michael Jordan","Scottie Pippen","Derrick Rose"],
+  championships: 6,
+  currentWinningRecord: false
+},
+{
+  city:"San Antonio",
+  name:"Spurs",
+  bestPlayers:["Tony Parker","Tim Duncan","Kawhi Leonard"],
+  championships:5,
+  currentWinningRecord:true
+},
+]
 
-// var new_campsite = {description: "Sharp rocks. Middle of nowhere."}
-
-// db.Campsite.create(new_campsite, function(err, campsite){
-//   if (err){
-//     return console.log("Error:", err);
-//   }
-
-//   console.log("Created new campsite", campsite._id)
-//   process.exit(); // we're all done! Exit the program.
-// })
+db.Team.remove({}, function(err,succ){
+  if(err){
+    console.log(err);
+  } db.Team.create(teams_list, function (err, dbTeams){
+   if(err){
+     console.log(err);
+   } console.log("created " + teams_list.length + " teams. Including: " + dbTeams);
+})
+})
